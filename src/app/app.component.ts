@@ -28,6 +28,5 @@ export class AppComponent implements OnInit {
     }
   }
   ngOnInit() {
-    // this.get_all_user();
   }
 }
