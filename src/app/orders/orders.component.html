@@ -1,0 +1,36 @@
+<div class="full-users">
+  <!-- <div class="add-new myclass">
+    <button class='add' value='Add new' (click)="add_new()">Add new</button>
+  </div> -->
+  <h1 style="padding: 3% 9%;">Orders</h1>
+  <div class="container">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>title</th>
+          <th>description</th>
+          <th>Status</th>
+          <th>PDF</th>
+          <th *ngIf="userservice.getCurrentUser()['role'] != 1">Accept</th>
+          <th *ngIf="userservice.getCurrentUser()['role'] != 1">Reject</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{order.title}} </td>
+          <td>{{order.description}}</td>
+          <td *ngIf="order.status == 1">Watting </td>
+          <td *ngIf="order.status == 2">Accepted </td>
+          <td *ngIf="order.status == 3">Rejected</td>
+          <td><a [href]="'../../assets/' + order.pdf_file" download="pdf">Download</a></td>
+          <td *ngIf="userservice.getCurrentUser()['role'] != 1"> <button
+              *ngIf="userservice.getCurrentUser()['role'] != 1 && order.status == 1" class='myclass' value='Edit'
+              (click)="accept(order.id)">Accept</button></td>
+          <td *ngIf="userservice.getCurrentUser()['role'] != 1"> <button class='myclass'
+              *ngIf="userservice.getCurrentUser()['role'] != 1 && order.status == 1" value='Delete'
+              (click)="cancel(order.id)">Reject</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

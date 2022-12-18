@@ -1,0 +1,28 @@
+<div class="full-users">
+  <h1 style="padding: 3% 9%;">Logs</h1>
+  <div class="container">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>entity</th>
+          <th>service</th>
+          <th>item</th>
+          <th>Create</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of logs">
+          <td>{{log.user}}</td>
+          <td>{{log.entity}}</td>
+          <td>{{log.service}} </td>
+          <td *ngIf="log.entity == 'users' && log.service == 'update_itme'">{{log.target_user}} </td>
+          <td *ngIf="log.entity == 'users' && log.service != 'update_itme'"> </td>
+          <td *ngIf="log.entity == 'orders'">{{log.title}} </td>
+          <td *ngIf="log.entity == 'login'">login</td>
+          <td>{{log.create_date}} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

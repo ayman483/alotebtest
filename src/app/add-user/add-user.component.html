@@ -1,0 +1,90 @@
+<div class="modal-header">
+  <div class="row" style="width: 100%;">
+    <div class="col-11">
+
+      <h4 *ngIf="user.id" class="modal-title">Edit User</h4>
+      <h4 *ngIf="!user.id" class="modal-title">Add User</h4>
+    </div>
+    <div class="col-1 col-cross-icon">
+      <i (click)="activeModal.close(false)">X</i>
+    </div>
+  </div>
+</div>
+<section id="trainerAddItem">
+  <form class="p-2 pb-4 form-genrl" novalidate [formGroup]="new_User" #addUserForm="ngForm">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-6 label-div">
+          <label for="" class="mb-2 lbl-genrl lbl-required">First_name</label>
+        </div>
+        <div class="col-md-6 error-msg-div">
+          <div class="error-message" *ngIf=" this.click_save">
+            First_name is required</div>
+        </div>
+      </div>
+      <input class="form-control form-control-genrl mb-4" type="text" formControlName="first_name" name="first_name"
+        [(ngModel)]="user.first_name" placeholder="first_name" required />
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-6 label-div">
+          <label for="" class="mb-2 lbl-genrl lbl-required">last_name</label>
+        </div>
+        <div class="col-md-6 error-msg-div">
+          <div class="error-message" *ngIf=" this.click_save">
+            last_name is required</div>
+        </div>
+      </div>
+      <input class="form-control form-control-genrl mb-4" type="text" formControlName="last_name" name="last_name"
+        [(ngModel)]="user.last_name" placeholder="last_name" required />
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-6 label-div">
+          <label for="" class="mb-2 lbl-genrl lbl-required">email</label>
+        </div>
+        <div class="col-md-6 error-msg-div">
+          <div class="error-message" *ngIf=" this.click_save">
+            email is required</div>
+        </div>
+      </div>
+      <input class="form-control form-control-genrl mb-4" type="text" formControlName="email" name="email"
+        [(ngModel)]="user.email" placeholder="email" required />
+    </div>
+    <div class="form-group"  *ngIf="!user.id" >
+      <div class="row">
+        <div class="col-md-6 label-div">
+          <label for="" class="mb-2 lbl-genrl lbl-required">password</label>
+        </div>
+      </div>
+      <input class="form-control form-control-genrl mb-4" type="text" formControlName="password" name="password"
+        [(ngModel)]="user.password" placeholder="password" />
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-6 label-div">
+          <label for="" class="mb-2 lbl-genrl lbl-required">role</label>
+        </div>
+        <div class="col-md-6 error-msg-div">
+          <div class="error-message" *ngIf=" this.click_save">
+            role is required</div>
+        </div>
+      </div>
+      <select class="form-control form-control-genrl mb-4" name="role" id="role" [(ngModel)]="user.role"
+        formControlName="role" required>
+        <option value="">Select role</option>
+        <option *ngIf="userService.getCurrentUser()['id'] != 1" value="1">employee</option>
+        <option *ngIf="userService.getCurrentUser()['id'] == 3" value="2">admin</option>
+        <!-- <option *ngIf="" value="3">super admin</option> -->
+      </select>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <button [ngClass]="{'enabled':checked(addUserForm),'disabled':!checked(addUserForm) }" rounded="true" mdbBtn
+          color="info" block="true" class="my-4" (click)="save()" type="submit" class="btn-add-course"> Save
+        </button>
+      </div>
+    </div>
+  </form>
+</section>

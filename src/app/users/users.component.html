@@ -1,0 +1,29 @@
+<div class="full-users">
+  <div class="add-new myclass">
+    <button class='add' value='Add new' (click)="add_new()">Add new</button>
+  </div>
+  <div class="container">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th *ngIf="userservice.getCurrentUser()['id'] != 1">Edit</th>
+          <th *ngIf="userservice.getCurrentUser()['id'] != 1">delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.first_name}} {{user.last_name}}</td>
+          <td>{{user.email}}</td>
+          <td *ngIf="user.role == 1">employee </td>
+          <td *ngIf="user.role == 2">Admin </td>
+          <td *ngIf="user.role == 3"> Super Admin</td>
+          <td  *ngIf="user.role != 3"> <button class='myclass' value='Edit' (click)="edit(user)">Edit</button></td>
+          <td *ngIf="user.role != 3"> <button class='myclass' value='Delete' (click)="delete(user.id)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
